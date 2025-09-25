@@ -32,6 +32,7 @@ coverage/
 # -----------------------
 # Docker
 # -----------------------
+docker-compose.override.yml
 *.local
 data/              # MongoDB data volume (if mounted locally)
 *.tar

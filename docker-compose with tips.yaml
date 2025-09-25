@@ -1,0 +1,48 @@
+services:
+  mongodb:
+    image: 'mongo'
+    # container_name: mongodb
+    volumes:
+      - data:/data/db
+    #environment:
+    #  MONGO_INITDB_ROOT_USERNAME: root
+    #  MONGO_INITDB_ROOT_PASSWORD: secret
+    #  - MONGO_INITDB_ROOT_PASSWORD=secret
+    env_file:
+      - ./env/mongo.env
+    #networks: Docker Compose creates a default network automatically
+    # - goals-net
+  
+  backend:
+    build: ./backend
+    # build:
+      # context: ./backend
+      # dockerfile: Dockerfile #could be Dockerfile-dev if have multiple docker files
+      # args:
+      #   some-arg: 1 # This are the args the can be defined in the Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/apps/logs         # Named volume (declared below)
+      - ./backend:/app          # Bind mount for live code reloads
+      - /app/node_modules       # Anonymous volume to preserve container's node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+       - ./frontend/src:/app/src  # Bind mount to sync source files
+    stdin_open: true              # Keeps STDIN open (equivalent to `-i`)
+    tty: true                     # Allocates TTY (equivalent to `-t`)
+    depends_on:
+      - backend
+
+
+
+volumes:
+  data:
+  logs:
