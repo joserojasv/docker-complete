@@ -18,9 +18,9 @@ logs/
 # -----------------------
 # Environment Variables
 # -----------------------
-.env
-.env.*
-env/
+#.env
+#.env.*
+#env/
 
 # -----------------------
 # Build Artifacts
