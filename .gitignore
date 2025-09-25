@@ -1,0 +1,62 @@
+# -----------------------
+# Node.js
+# -----------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# -----------------------
+# Logs
+# -----------------------
+logs/
+*.log
+*.out
+*.pid
+
+# -----------------------
+# Environment Variables
+# -----------------------
+.env
+.env.*
+env/
+
+# -----------------------
+# Build Artifacts
+# -----------------------
+dist/
+build/
+coverage/
+
+# -----------------------
+# Docker
+# -----------------------
+*.local
+data/              # MongoDB data volume (if mounted locally)
+*.tar
+
+# -----------------------
+# OS-specific
+# -----------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------
+# Editor Config
+# -----------------------
+.vscode/
+.idea/
+
+# -----------------------
+# Misc
+# -----------------------
+*.swp
+*.bak
+*.tmp
+*.old
+
+# -----------------------
+# Ignore specific experimental/test files
+# -----------------------
+docker-compose with tips.yaml

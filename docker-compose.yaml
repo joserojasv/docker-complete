@@ -1,0 +1,38 @@
+services:
+  mongodb:
+    image: mongo
+    volumes:
+      - data:/data/db
+    env_file:
+      - ./env/mongo.env
+    # Docker Compose creates a default network automatically
+
+  backend:
+    build: ./backend
+    image: jrojascr/docker-complete-backend:latest
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/apps/logs           # Named volume (declared below)
+      - ./backend:/app            # Bind mount for live code reloads
+      - /app/node_modules         # Anonymous volume to preserve container's node_modules
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend
+    image: jrojascr/docker-complete-frontend:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/src:/app/src   # Bind mount to sync source files
+    stdin_open: true              # Keeps STDIN open (equivalent to `-i`)
+    tty: true                     # Allocates TTY (equivalent to `-t`)
+    depends_on:
+      - backend
+
+volumes:
+  data:
+  logs:
