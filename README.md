@@ -61,7 +61,7 @@ This app uses multiple containers that need to communicate with each other.
 **Imperative:** Run the docker build, docker run, and other commands manually in the terminal.</br>
 **Declarative:** Use docker-compose to configure and start everything with a single command.
 
-### --> Imperative Method (Manual)
+### 1- Imperative Method (Manual)
 1. Create a private Docker network:
 ```bash
 docker network create goals-net
@@ -91,7 +91,7 @@ Run the frontend container:
 docker run -v /Users/jose.rojas/develop/docker-complete/frontend/src:/app/src --name goals-frontend --network goals-net --rm -p 3000:3000 -it goals-react
 ```
 
-### --> Declarative Method (Using Docker Compose)
+### 2- Declarative Method (Using Docker Compose)
 Instead of running multiple commands, use **docker-compose** to build and start all containers together.
 To start the app with Docker Compose:
 
