@@ -164,6 +164,39 @@ To stop and remove all containers, networks, and volumes created by Compose, run
 docker compose down -v
 ```
 
+### 🗺️ Architecture Overview
+
+```text
++--------------------------+
+| Frontend Container       |
+| Service: frontend        |
+| Image: jrojascr/docker-complete-frontend |
+| Port: 3000               |
++--------------------------+
+            |
+            |  HTTP requests (e.g. user submits form)
+            v
++--------------------------+
+| Backend Container        |
+| Service: backend         |
+| Image: jrojascr/docker-complete-backend  |
+| Port: 80                 |
++--------------------------+
+            |
+            |  TCP connection (using credentials)
+            v
++--------------------------+
+| MongoDB Container        |
+| Service: mongodb         |
+| Image: mongo             |
+| Port: 27017 (default)    |
++--------------------------+
+```
+- All containers run in the same Docker network (via Docker Compose)
+- Frontend communicates with Backend via HTTP (e.g. http://backend:80)
+- Backend connects to MongoDB using credentials and service name
+- Each container is a service defined in `docker-compose.yaml`
+
 ## 📤 Pushing Images to Docker Hub
 
 Once you've built your Docker images locally, you can share them with others by uploading them to [Docker Hub](https://hub.docker.com).
