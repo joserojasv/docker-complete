@@ -96,11 +96,6 @@ Instead of running multiple commands, use **docker-compose** to build and start 
 To start the app with Docker Compose:
 
 ```bash
-docker compose up --build
-```
-
-To run it in detached mode (in the background):
-```bash
 docker compose up -d --build
 ```
 
@@ -150,7 +145,14 @@ volumes:
 Make sure your .env files (./env/mongo.env, ./env/backend.env) are properly set up with environment variables.
 From the root of your project (where the docker-compose.yml is located), run:
 ```bash
-docker compose up --build
+ℹ️ INFO
+docker compose up --build # Start and build all containers together.
+docker compose up -d # Start all containers together in detached mode (in the background)
+
+⚠️ WARNING
+docker compose stop # Just stops containers (does not remove them)
+docker compose down # Stops and removes containers + networks
+docker compose down -v # Stops and removes containers, networks, and volumes
 ```
 This will:</br>
 
@@ -159,10 +161,6 @@ This will:</br>
 - 📦 **Create** the named volumes (`data` and `logs`) automatically.
 - 🌐 **Set up** the default Docker network so containers can communicate with each other.
 
-To stop and remove all containers, networks, and volumes created by Compose, run:
-```bash
-docker compose down -v
-```
 
 ### 🗺️ Architecture Overview
 
@@ -244,14 +242,29 @@ docker logs <container_name_or_id>
 ⚠️ WARNING
 
 **Be careful when running these commands! They can delete containers, images, and more.**</br>
-1.Stop and remove all containers
+
+1. Stop and remove all containers
 ```bash
 docker stop $(docker ps -q) && docker rm $(docker ps -aq)
 ```
 
-2. Remove all images 
+3. Remove single container
+```bash
+docker rm <container_name_or_id>
+```
+
+4. Remove all images 
 ```bash
 docker rmi $(docker images -q)
+```
+
+5. Remove single image
+```bash
+docker rmi <container_name_or_id>
+```
+6. Remove volume
+```bash
+docker volume rm <volume_name_or_id>
 ```
 
 🔥 Optional full cleanup:
@@ -260,7 +273,7 @@ If you're just cleaning up everything (containers, images, networks, build cache
 docker system prune -a
 ```
 ⚠️ This will delete:
-All stopped containers
+All **stopped** containers
 All images not used by running containers
 All networks not used
 All build cache
