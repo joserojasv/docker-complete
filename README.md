@@ -99,6 +99,14 @@ To start the app with Docker Compose:
 docker compose up -d --build
 ```
 
+This will:</br>
+
+- ✅ **Build** the backend and frontend images from their respective directories.
+- 🐳 **Start** the MongoDB, backend, and frontend containers using Docker Compose (detached mode).
+- 📦 **Create** the named volumes (`data` and `logs`) automatically.
+- 🌐 **Set up** the default Docker network so containers can communicate with each other.
+
+docker-compose.yaml
 ```bash
 # -> Example for Docker Compose File <-
 
@@ -154,13 +162,6 @@ docker compose stop # Just stops containers (does not remove them)
 docker compose down # Stops and removes containers + networks
 docker compose down -v # Stops and removes containers, networks, and volumes
 ```
-This will:</br>
-
-- ✅ **Build** the backend and frontend images from their respective directories.
-- 🐳 **Start** the MongoDB, backend, and frontend containers using Docker Compose.
-- 📦 **Create** the named volumes (`data` and `logs`) automatically.
-- 🌐 **Set up** the default Docker network so containers can communicate with each other.
-
 
 ### 🗺️ Architecture Overview
 
