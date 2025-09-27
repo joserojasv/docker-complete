@@ -206,8 +206,9 @@ docker login
 ```
 🏷️ 2. Tag your images
 You must tag your image using the format:
-<your-dockerhub-username>/<repository-name>:<tag>
-
+```bash
+docker tag <image_name> <your-dockerhub-username>/<repo_name>:<version>
+```
 ```bash
 # Example for backend
 docker tag goals-node jrojascr/docker-complete-backend:latest
@@ -217,6 +218,9 @@ docker tag goals-react jrojascr/docker-complete-frontend:latest
 ```
 
 🚀 3. Push the images to Docker Hub
+```bash
+docker push <your-dockerhub-username>/<repo_name>
+```
 ```bash
 # Push backend
 docker push jrojascr/docker-complete-backend:latest
