@@ -238,7 +238,9 @@ docker pull jrojascr/docker-complete-frontend:latest
 
 
 See the logs
+```bash
 docker logs <container_name_or_id>
+```
 
 ⚠️ WARNING
 
